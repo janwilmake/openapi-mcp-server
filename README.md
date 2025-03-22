@@ -1,4 +1,4 @@
-# OpenAPI MCP
+# OpenAPI MCP Server
 
 A Model Context Protocol (MCP) server for Claude/Cursor that enables searching and exploring OpenAPI specifications through oapis.org.
 
@@ -21,7 +21,7 @@ A Model Context Protocol (MCP) server for Claude/Cursor that enables searching a
 Run and follow instructions:
 
 ```bash
-npx slop-mcp init
+npx openapi-mcp-server init
 ```
 
 ## Usage in Claude
