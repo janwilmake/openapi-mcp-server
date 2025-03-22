@@ -2,6 +2,9 @@
 
 A Model Context Protocol (MCP) server for Claude/Cursor that enables searching and exploring OpenAPI specifications through oapis.org.
 
+- Demo: https://x.com/janwilmake/status/1903497808134496583
+- HN Thread: https://news.ycombinator.com/item?id=43447278
+
 > [!IMPORTANT]
 > OpenAPI MCP has found a [new owner](https://github.com/janwilmake) and has been migrated from v1.2 to v2, which works different to the previous version. You can still access any version prior to v2.0.0 and their README is [here](README-v1.md)
 >
