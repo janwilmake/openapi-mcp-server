@@ -7,6 +7,12 @@ A Model Context Protocol (MCP) server for Claude/Cursor that enables searching a
 - OpenAPISearch: https://github.com/janwilmake/openapisearch
 - OAPIS: https://github.com/janwilmake/oapis
 
+The MCP works by applying a 3 step process :
+
+1. It figures out the openapi identifier you need
+2. It requests a summary of that in simple language
+3. It determines which endpoints you need, and checks out how exactly they work (again, in simple language)
+
 > [!IMPORTANT]
 > OpenAPI MCP has found a [new owner](https://github.com/janwilmake) and has been migrated from v1.2 to v2, which works different to the previous version. You can still access any version prior to v2.0.0 and their README is [here](README-v1.md)
 >
