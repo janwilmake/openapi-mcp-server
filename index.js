@@ -72,27 +72,23 @@ function formatApiId(id) {
 // Tool handlers
 const HANDLERS = {
   getApiOverview: async (request) => {
-    const { id, format = "json" } = request.params.arguments;
+    const { id } = request.params.arguments;
     const formattedId = formatApiId(id);
 
     log("Executing getApiOverview for API:", formattedId);
-
-    // Set content type based on format
-    const acceptHeader = format === "yaml" ? "text/yaml" : "application/json";
-    const headers = { Accept: acceptHeader };
 
     try {
       // Fetch from oapis.org/overview endpoint
       const url = `https://oapis.org/overview/${formattedId}`;
       log("SLOP API request URL:", url);
 
-      const response = await fetch(url, { headers });
+      const response = await fetch(url);
       if (!response.ok) {
         const error = await response.text();
         throw new Error(`SLOP API error: ${error}`);
       }
 
-      // Get response based on format
+      // Get response
       let responseContent = await response.text();
 
       return {
@@ -127,11 +123,9 @@ const HANDLERS = {
       operationIdOrRoute,
     );
 
-    // Set content type based on format
-
     try {
-      // Fetch from oapis.org/summary endpoint
-      const url = `https://oapis.org/summary/${formattedId}/${operationIdOrRoute}`;
+      // Fetch from oapis.org/openapi endpoint instead of summary
+      const url = `https://oapis.org/openapi/${formattedId}/${operationIdOrRoute}`;
       log("SLOP API request URL:", url);
 
       const response = await fetch(url);
@@ -274,12 +268,6 @@ async function main() {
               description:
                 "API identifier, can be a known ID from openapisearch.com or a URL (without protocol) with slashes replaced by '__'",
             },
-            format: {
-              type: "string",
-              description: "Response format (json or yaml)",
-              enum: ["json", "yaml"],
-              default: "json",
-            },
           },
           required: ["id"],
         },
@@ -299,12 +287,6 @@ async function main() {
             operationIdOrRoute: {
               type: "string",
               description: "Operation ID or route path to retrieve",
-            },
-            format: {
-              type: "string",
-              description: "Response format (json or yaml)",
-              enum: ["json", "yaml"],
-              default: "json",
             },
           },
           required: ["id", "operationIdOrRoute"],
