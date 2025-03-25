@@ -229,7 +229,7 @@ export async function init() {
       ),
     );
   } else {
-    const fullConfig = { mcpServers: { slop: cloudflareConfig } };
+    const fullConfig = { mcpServers: { slop: config } };
     console.log(
       `Couldn't detect Claude Desktop config at ${claudeConfigPath}.\nTo add the SLOP MCP server manually, add the following config to your ${chalk.yellow(
         "MCP config-file",
