@@ -59,27 +59,16 @@ async function findNodePath() {
   }
 }
 
-// Format the API ID for URL use
-function formatApiId(id) {
-  // If ID contains protocol, remove it and format
-  if (id.startsWith("http://") || id.startsWith("https://")) {
-    const urlWithoutProtocol = id.replace(/^https?:\/\//, "");
-    return urlWithoutProtocol.replace(/\//g, "__");
-  }
-  return id;
-}
-
 // Tool handlers
 const HANDLERS = {
   getApiOverview: async (request) => {
     const { id } = request.params.arguments;
-    const formattedId = formatApiId(id);
 
-    log("Executing getApiOverview for API:", formattedId);
+    log("Executing getApiOverview for API:", id);
 
     try {
       // Fetch from oapis.org/overview endpoint
-      const url = `https://oapis.org/overview/${formattedId}`;
+      const url = `https://oapis.org/overview/${encodeURIComponent(id)}`;
       log("SLOP API request URL:", url);
 
       const response = await fetch(url);
@@ -91,6 +80,13 @@ const HANDLERS = {
       // Get response
       let responseContent = await response.text();
 
+      const tooBig = responseContent.length > 250000;
+
+      if (tooBig) {
+        throw new Error(
+          `The SLOP found is too large to process with this MCP. Please try a different OpenAPI.`,
+        );
+      }
       return {
         content: [{ type: "text", text: responseContent }],
         metadata: {},
@@ -114,18 +110,19 @@ const HANDLERS = {
 
   getApiOperation: async (request) => {
     const { id, operationIdOrRoute } = request.params.arguments;
-    const formattedId = formatApiId(id);
 
     log(
       "Executing getApiOperation for API:",
-      formattedId,
+      id,
       "Operation:",
       operationIdOrRoute,
     );
 
     try {
       // Fetch from oapis.org/openapi endpoint instead of summary
-      const url = `https://oapis.org/openapi/${formattedId}/${operationIdOrRoute}`;
+      const url = `https://oapis.org/openapi/${encodeURIComponent(
+        id,
+      )}/${operationIdOrRoute}`;
       log("SLOP API request URL:", url);
 
       const response = await fetch(url);
@@ -266,7 +263,7 @@ async function main() {
             id: {
               type: "string",
               description:
-                "API identifier, can be a known ID from openapisearch.com or a URL (without protocol) with slashes replaced by '__'",
+                "API identifier, can be a known ID from openapisearch.com or a URL leading to a raw OpenAPI file",
             },
           },
           required: ["id"],
@@ -282,7 +279,7 @@ async function main() {
             id: {
               type: "string",
               description:
-                "API identifier, can be a known ID from openapisearch.com or a URL (without protocol) with slashes replaced by '__'",
+                "API identifier, can be a known ID from openapisearch.com or a URL leading to a raw OpenAPI file",
             },
             operationIdOrRoute: {
               type: "string",

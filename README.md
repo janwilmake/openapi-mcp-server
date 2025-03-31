@@ -32,7 +32,7 @@ The MCP works by applying a 3 step process :
 Run and follow instructions:
 
 ```bash
-npx openapi-mcp-server init
+npx openapi-mcp-server@latest init
 ```
 
 ## Usage in Claude
