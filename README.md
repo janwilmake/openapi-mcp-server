@@ -29,6 +29,12 @@ The MCP works by applying a 3 step process :
 - Support for both JSON and YAML formats
 - Tested with Claude Desktop and Cursor
 
+| Summary | Prompt it |
+|---------|-----------|
+| Basic understanding of the OpenAPI MCP Server | [![](https://b.lmpify.com/overview)](https://lmpify.com?q=https%3A%2F%2Fuuithub.com%2Fjanwilmake%2Fopenapi-mcp-server%2Ftree%2Fmain%3FpathPatterns%3DREADME.md%26pathPatterns%3Dopenapi-mcp.drawio.png%0A%0ACan%20you%20explain%20what%20OpenAPI%20MCP%20Server%20does%20and%20how%20I%20can%20use%20it%20with%20Claude%20Desktop%3F) |
+| Core implementation details of the MCP server | [![](https://b.lmpify.com/implementation)](https://lmpify.com?q=https%3A%2F%2Fuuithub.com%2Fjanwilmake%2Fopenapi-mcp-server%2Ftree%2Fmain%3FpathPatterns%3Dindex.js%26pathPatterns%3Dpackage.json%0A%0AHow%20does%20the%20OpenAPI%20MCP%20Server%20handle%20API%20requests%3F%20Can%20you%20explain%20the%20tool%20handlers%3F) |
+| How to extend or contribute to the project | [![](https://b.lmpify.com/extend)](https://lmpify.com?q=https%3A%2F%2Fuuithub.com%2Fjanwilmake%2Fopenapi-mcp-server%2Ftree%2Fmain%3FpathPatterns%3Dindex.js%26pathPatterns%3Dpackage.json%26pathPatterns%3DREADME.md%0A%0AI'd%20like%20to%20add%20support%20for%20a%20new%20feature%20to%20the%20OpenAPI%20MCP%20Server.%20Where%20should%20I%20start%3F) |
+
 ## Installation
 
 ### Installing via Smithery
