@@ -1,0 +1,21 @@
+{
+  "$schema": "https://contextjson.com/context.schema.json",
+  "attribution": "https://github.com/janwilmake/contextjson",
+  "context": {
+    "overview": {
+      "summary": "Basic understanding of the OpenAPI MCP Server",
+      "pathPatterns": ["README.md", "openapi-mcp.drawio.png"],
+      "prompt": "Can you explain what OpenAPI MCP Server does and how I can use it with Claude Desktop?"
+    },
+    "implementation": {
+      "summary": "Core implementation details of the MCP server",
+      "pathPatterns": ["index.js", "package.json"],
+      "prompt": "How does the OpenAPI MCP Server handle API requests? Can you explain the tool handlers?"
+    },
+    "extend": {
+      "summary": "How to extend or contribute to the project",
+      "pathPatterns": ["index.js", "package.json", "README.md"],
+      "prompt": "I'd like to add support for a new feature to the OpenAPI MCP Server. Where should I start?"
+    }
+  }
+}
