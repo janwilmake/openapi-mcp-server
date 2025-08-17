@@ -1,5 +1,6 @@
 # OpenAPI MCP Server
 
+[![Trust Score](https://archestra.ai/mcp-catalog/api/badge/quality/snaggle-ai/openapi-mcp-server)](https://archestra.ai/mcp-catalog/snaggle-ai__openapi-mcp-server)
 [![smithery badge](https://smithery.ai/badge/@janwilmake/openapi-mcp-server)](https://smithery.ai/server/@janwilmake/openapi-mcp-server) [![janwilmake/openapi-mcp-server context](https://badge.forgithub.com/janwilmake/openapi-mcp-server?excludePathPatterns=README-v1.md&excludePathPatterns=*.yaml)](https://uithub.com/janwilmake/openapi-mcp-server?excludePathPatterns=README-v1.md&excludePathPatterns=*.yaml)
 
 A Model Context Protocol (MCP) server for Claude/Cursor that enables searching and exploring OpenAPI specifications through oapis.org.
