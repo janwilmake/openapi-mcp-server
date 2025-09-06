@@ -32,11 +32,15 @@ The MCP works by applying a 3 step process :
 
 ### Installing via Smithery
 
+Our hosted smithery URL is https://smithery.ai/server/@janwilmake/openapi-mcp-server
+
 To install openapi-mcp-server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@janwilmake/openapi-mcp-server):
 
 ```bash
 npx -y @smithery/cli install @janwilmake/openapi-mcp-server --client claude
 ```
+
+For other clients, see the [smithery page](https://smithery.ai/server/@janwilmake/openapi-mcp-server) for instructions.
 
 ### Installing using stdio
 
