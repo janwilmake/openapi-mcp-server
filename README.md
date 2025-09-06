@@ -1,6 +1,6 @@
 # OpenAPI MCP Server
 
-[![smithery badge](https://smithery.ai/badge/@janwilmake/openapi-mcp-server)](https://smithery.ai/server/@janwilmake/openapi-mcp-server) [![janwilmake/openapi-mcp-server context](https://badge.forgithub.com/janwilmake/openapi-mcp-server?excludePathPatterns=README-v1.md&excludePathPatterns=*.yaml)](https://uithub.com/janwilmake/openapi-mcp-server?excludePathPatterns=README-v1.md&excludePathPatterns=*.yaml)
+[![smithery badge](https://smithery.ai/badge/@janwilmake/openapi-mcp-server)](https://smithery.ai/server/@janwilmake/openapi-mcp-server) [![janwilmake/openapi-mcp-server context](https://badge.forgithub.com/janwilmake/openapi-mcp-server?excludePathPatterns=*.yaml)](https://uithub.com/janwilmake/openapi-mcp-server?excludePathPatterns=*.yaml)
 
 A Model Context Protocol (MCP) server for Claude/Cursor that enables searching and exploring OpenAPI specifications through oapis.org.
 
@@ -14,13 +14,6 @@ The MCP works by applying a 3 step process :
 1. It figures out the openapi identifier you need
 2. It requests a summary of that in simple language
 3. It determines which endpoints you need, and checks out how exactly they work (again, in simple language)
-
-> [!IMPORTANT]
-> OpenAPI MCP has found a [new owner](https://github.com/janwilmake) and has been migrated from v1.2 to v2, which works different to the previous version. You can still access any version prior to v2.0.0 and their README is [here](README-v1.md)
->
-> OpenAPI MCP v2 is a Work In Progress and focuses on exploration and providing context about APIs. It **does not** allow executing the endpoints as tools directly, as authentication isn't a solved problem with MCP yet. However, it's great for codegen!
->
-> Expect bugs. Open To Contributers, [DM](https://x.com/janwilmake)
 
 ## Features
 
