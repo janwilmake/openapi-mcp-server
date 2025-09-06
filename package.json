@@ -6,11 +6,11 @@
     "server",
     "proxy"
   ],
-  "version": "2.0.3",
+  "version": "2.1.0",
   "license": "MIT",
   "type": "module",
+  "module": "index.js",
   "bin": {
-    "slop-mcp": "index.js",
     "openapi-mcp-server": "index.js"
   },
   "description": "MCP server for interacting with openapisearch.com API",
@@ -20,15 +20,17 @@
     "README.md"
   ],
   "scripts": {
-    "postinstall": "chmod +x index.js"
+    "dev": "node index.js",
+    "dev-smithery": "npx @smithery/cli dev"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^0.6.0",
-    "chalk": "^5.3.0",
-    "dotenv": "^16.4.5",
-    "undici": "^5.28.4"
+    "@modelcontextprotocol/sdk": "^1.17.5",
+    "zod": "^3.25.76"
   },
   "engines": {
-    "node": ">=16.17.0"
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.5"
   }
 }
