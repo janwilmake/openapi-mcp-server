@@ -26,6 +26,8 @@ Features
 
 [![Install OpenAPI MCP Server](https://img.shields.io/badge/Install_MCP-OpenAPI%20MCP%20Server-1e3a8a?style=for-the-badge)](https://installthismcp.com/OpenAPI%20MCP%20Server?url=https%3A%2F%2Fopenapi-mcp.openapisearch.com%2Fmcp)
 
+For other clients, use MCP URL: https://openapi-mcp.openapisearch.com/mcp
+
 ## Local testing
 
 First run the server
