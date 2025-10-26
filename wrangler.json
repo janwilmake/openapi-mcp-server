@@ -1,0 +1,10 @@
+{
+  "$schema": "https://unpkg.com/wrangler@latest/config-schema.json",
+  "name": "openapi-mcp-server",
+  "main": "worker.ts",
+  "routes": [
+    { "custom_domain": true, "pattern": "openapi-mcp.openapisearch.com" }
+  ],
+  "compatibility_date": "2025-10-14",
+  "observability": { "logs": { "enabled": true } }
+}

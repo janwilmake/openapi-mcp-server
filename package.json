@@ -1,36 +1,6 @@
 {
-  "name": "openapi-mcp-server",
-  "keywords": [
-    "openapi",
-    "mcp",
-    "server",
-    "proxy"
-  ],
-  "version": "2.1.0",
-  "license": "MIT",
-  "type": "module",
-  "module": "index.js",
-  "bin": {
-    "openapi-mcp-server": "index.js"
-  },
-  "description": "MCP server for interacting with openapisearch.com API",
-  "main": "index.js",
-  "files": [
-    "index.js",
-    "README.md"
-  ],
-  "scripts": {
-    "dev": "node index.js",
-    "dev-smithery": "npx @smithery/cli dev"
-  },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.17.5",
-    "zod": "^3.25.76"
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "devDependencies": {
-    "tsx": "^4.20.5"
+    "@trojs/openapi-dereference": "^1.0.1",
+    "js-yaml": "^4.1.0"
   }
 }
