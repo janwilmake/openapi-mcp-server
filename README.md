@@ -15,12 +15,16 @@ The MCP works by applying a 3 step process:
 2. It requests a summary of that in simple language
 3. It determines which endpoints you need, and checks out how exactly they work (again, in simple language)
 
-## Features
+Features
 
 - Get an overview of any OpenAPI specification
 - Retrieve details about specific API operations
 - Support for both JSON and YAML formats
 - Tested with Claude Desktop and Cursor
+
+## Installation
+
+[![Install OpenAPI MCP Server](https://img.shields.io/badge/Install_MCP-OpenAPI%20MCP%20Server-1e3a8a?style=for-the-badge)](https://installthismcp.com/OpenAPI%20MCP%20Server?url=https%3A%2F%2Fopenapi-mcp.openapisearch.com%2Fmcp)
 
 ## Local testing
 
