@@ -601,6 +601,11 @@ async function handleMcp(request: Request) {
             },
             required: ["id"],
           },
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+            openWorldHint: true,
+          },
         },
         {
           name: "getApiOperation",
@@ -620,6 +625,11 @@ async function handleMcp(request: Request) {
               },
             },
             required: ["id", "operationIdOrRoute"],
+          },
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+            openWorldHint: true,
           },
         },
       ];
