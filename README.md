@@ -1,5 +1,6 @@
 # OpenAPI MCP Server
 
+[![AgentAudit: Safe](https://img.shields.io/badge/AgentAudit-Safe-brightgreen)](https://www.agentaudit.dev/audit/openapi-mcp-server)
 [![janwilmake/openapi-mcp-server context](https://badge.forgithub.com/janwilmake/openapi-mcp-server?excludePathPatterns=*.yaml)](https://uithub.com/janwilmake/openapi-mcp-server?excludePathPatterns=*.yaml)
 
 A Model Context Protocol (MCP) server for Claude/Cursor that enables searching and exploring OpenAPI specifications through oapis.org.
