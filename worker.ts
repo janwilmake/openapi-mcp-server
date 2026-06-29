@@ -40,6 +40,19 @@ interface RequestBody {
   };
 }
 
+const openApiHttpMethods = [
+  "get",
+  "put",
+  "post",
+  "delete",
+  "options",
+  "head",
+  "patch",
+  "trace",
+] as const;
+
+type OpenApiHttpMethod = (typeof openApiHttpMethods)[number];
+
 interface Operation {
   operationId?: string;
   servers?: Server[];
@@ -52,13 +65,7 @@ interface Operation {
   };
 }
 
-interface PathItem {
-  get?: Operation;
-  post?: Operation;
-  put?: Operation;
-  delete?: Operation;
-  patch?: Operation;
-}
+type PathItem = Partial<Record<OpenApiHttpMethod, Operation>>;
 
 type Server = { url: string; description?: string };
 
@@ -220,10 +227,8 @@ function generateOverview(hostname: string, openapi: OpenapiDocument): string {
 
   if (openapi.paths) {
     for (const [path, pathItem] of Object.entries(openapi.paths)) {
-      const methods = ["get", "post", "put", "patch", "delete"];
-
-      for (const method of methods) {
-        const operation = pathItem[method as keyof typeof pathItem];
+      for (const method of openApiHttpMethods) {
+        const operation = pathItem[method];
         if (!operation) continue;
 
         const serverOrigin = getServerOrigin(operation, openapi.servers || []);
@@ -270,18 +275,26 @@ function generateOverview(hostname: string, openapi: OpenapiDocument): string {
 
 // ==================== OPENAPI OPERATIONS ====================
 
-function matchOperation(openapi: OpenapiDocument, pathname: string) {
+export function matchOperation(openapi: OpenapiDocument, pathname: string) {
   if (!openapi.paths) {
     return;
   }
 
   // First try direct path match
-  const directMatch = openapi.paths[pathname]?.get;
+  const directMatch = openapi.paths[pathname];
   if (directMatch) {
+    const matchingMethod = openApiHttpMethods.find(
+      (httpMethod) => directMatch[httpMethod]
+    );
+
+    if (!matchingMethod) {
+      return undefined;
+    }
+
     return {
-      operation: directMatch,
+      operation: directMatch[matchingMethod],
       originalPath: pathname,
-      method: "GET"
+      method: matchingMethod.toUpperCase()
     };
   }
 
@@ -289,16 +302,13 @@ function matchOperation(openapi: OpenapiDocument, pathname: string) {
 
   // Then try operationId match
   for (const [path, pathItem] of Object.entries(openapi.paths)) {
-    const matchingMethod = ["get", "post", "put", "patch", "delete"].find(
-      (httpMethod) => {
-        const operation = pathItem?.[httpMethod as keyof typeof pathItem];
-        return operation?.operationId === normalizedPathname;
-      }
+    const matchingMethod = openApiHttpMethods.find(
+      (httpMethod) => pathItem?.[httpMethod]?.operationId === normalizedPathname
     );
 
     if (matchingMethod) {
       return {
-        operation: pathItem[matchingMethod as keyof typeof pathItem],
+        operation: pathItem[matchingMethod],
         originalPath: path,
         method: matchingMethod.toUpperCase()
       };
@@ -453,13 +463,8 @@ async function handleGetApiOperation(args: {
     if (!op?.operation) {
       const operationIds = Object.values(convertedOpenapi.paths)
         .map((item) =>
-          [
-            item.get?.operationId,
-            item.post?.operationId,
-            item.delete?.operationId,
-            item.put?.operationId,
-            item.patch?.operationId
-          ]
+          openApiHttpMethods
+            .map((httpMethod) => item[httpMethod]?.operationId)
             .filter(Boolean)
             .map((x) => x!)
         )
