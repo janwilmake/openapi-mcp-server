@@ -110,7 +110,7 @@ const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
   "Access-Control-Allow-Headers":
-    "Content-Type, Authorization, MCP-Protocol-Version",
+    "Content-Type, Authorization, MCP-Protocol-Version"
 };
 
 // ==================== HELPER FUNCTIONS ====================
@@ -281,7 +281,7 @@ function matchOperation(openapi: OpenapiDocument, pathname: string) {
     return {
       operation: directMatch,
       originalPath: pathname,
-      method: "GET",
+      method: "GET"
     };
   }
 
@@ -300,7 +300,7 @@ function matchOperation(openapi: OpenapiDocument, pathname: string) {
       return {
         operation: pathItem[matchingMethod as keyof typeof pathItem],
         originalPath: path,
-        method: matchingMethod.toUpperCase(),
+        method: matchingMethod.toUpperCase()
       };
     }
   }
@@ -324,16 +324,16 @@ function getInitializeResult() {
       icons: [
         {
           src: "https://www.google.com/s2/favicons?domain=openapisearch.com&sz=48",
-          sizes: ["32x32", "16x16", "48x48"],
+          sizes: ["32x32", "16x16", "48x48"]
         },
         {
           src: "https://www.google.com/s2/favicons?domain=openapisearch.com&sz=256",
-          sizes: ["any"],
-        },
-      ],
+          sizes: ["any"]
+        }
+      ]
     },
     instructions:
-      "This MCP server provides access to OpenAPI specifications. Use 'getApiOverview' first to understand an API's structure, then use 'getApiOperation' to get details about specific endpoints.",
+      "This MCP server provides access to OpenAPI specifications. Use 'getApiOverview' first to understand an API's structure, then use 'getApiOperation' to get details about specific endpoints."
   };
 }
 
@@ -345,10 +345,10 @@ async function handleGetApiOverview(args: { id: string }) {
       content: [
         {
           type: "text",
-          text: "Error: 'id' parameter is required",
-        },
+          text: "Error: 'id' parameter is required"
+        }
       ],
-      isError: true,
+      isError: true
     };
   }
 
@@ -380,7 +380,7 @@ async function handleGetApiOverview(args: { id: string }) {
 
     const overview = generateOverview(id, convertedOpenapi);
 
-    if (overview.length > 250000) {
+    if (overview.length > 250000 * 5) {
       throw new Error(
         "The OpenAPI specification is too large to process with this MCP. Please try a different OpenAPI."
       );
@@ -388,17 +388,17 @@ async function handleGetApiOverview(args: { id: string }) {
 
     return {
       content: [{ type: "text", text: overview }],
-      isError: false,
+      isError: false
     };
   } catch (error: any) {
     return {
       content: [
         {
           type: "text",
-          text: `Error: ${error.message}`,
-        },
+          text: `Error: ${error.message}`
+        }
       ],
-      isError: true,
+      isError: true
     };
   }
 }
@@ -414,10 +414,10 @@ async function handleGetApiOperation(args: {
       content: [
         {
           type: "text",
-          text: "Error: Both 'id' and 'operationIdOrRoute' parameters are required",
-        },
+          text: "Error: Both 'id' and 'operationIdOrRoute' parameters are required"
+        }
       ],
-      isError: true,
+      isError: true
     };
   }
 
@@ -458,7 +458,7 @@ async function handleGetApiOperation(args: {
             item.post?.operationId,
             item.delete?.operationId,
             item.put?.operationId,
-            item.patch?.operationId,
+            item.patch?.operationId
           ]
             .filter(Boolean)
             .map((x) => x!)
@@ -478,9 +478,9 @@ async function handleGetApiOperation(args: {
       ...convertedOpenapi,
       paths: {
         [op.originalPath]: {
-          [op.method.toLowerCase()]: op.operation,
-        },
-      },
+          [op.method.toLowerCase()]: op.operation
+        }
+      }
     };
 
     try {
@@ -490,12 +490,12 @@ async function handleGetApiOperation(args: {
 
       return {
         content: [{ type: "text", text: dump(dereferenced) }],
-        isError: false,
+        isError: false
       };
     } catch {
       return {
         content: [{ type: "text", text: dump(subset) }],
-        isError: false,
+        isError: false
       };
     }
   } catch (error: any) {
@@ -503,10 +503,10 @@ async function handleGetApiOperation(args: {
       content: [
         {
           type: "text",
-          text: `Error: ${error.message}`,
-        },
+          text: `Error: ${error.message}`
+        }
       ],
-      isError: true,
+      isError: true
     };
   }
 }
@@ -521,7 +521,7 @@ async function handleMcp(request: Request) {
   ) {
     return new Response("Only Streamable HTTP is supported", {
       status: 405,
-      headers: corsHeaders,
+      headers: corsHeaders
     });
   }
 
@@ -530,15 +530,15 @@ async function handleMcp(request: Request) {
     return new Response(JSON.stringify(initializeResult, null, 2), {
       headers: {
         "Content-Type": "application/json",
-        ...corsHeaders,
-      },
+        ...corsHeaders
+      }
     });
   }
 
   if (request.method !== "POST") {
     return new Response("Method not allowed", {
       status: 405,
-      headers: corsHeaders,
+      headers: corsHeaders
     });
   }
 
@@ -559,7 +559,7 @@ async function handleMcp(request: Request) {
     if (message.method === "notifications/initialized") {
       return new Response(null, {
         status: 202,
-        headers: corsHeaders,
+        headers: corsHeaders
       });
     }
 
@@ -596,11 +596,11 @@ async function handleMcp(request: Request) {
               id: {
                 type: "string",
                 description:
-                  "API identifier, can be a known ID from openapisearch.com or a URL leading to a raw OpenAPI file",
-              },
+                  "API identifier, can be a known ID from openapisearch.com or a URL leading to a raw OpenAPI file"
+              }
             },
-            required: ["id"],
-          },
+            required: ["id"]
+          }
         },
         {
           name: "getApiOperation",
@@ -612,16 +612,16 @@ async function handleMcp(request: Request) {
               id: {
                 type: "string",
                 description:
-                  "API identifier, can be a known ID from openapisearch.com or a URL leading to a raw OpenAPI file",
+                  "API identifier, can be a known ID from openapisearch.com or a URL leading to a raw OpenAPI file"
               },
               operationIdOrRoute: {
                 type: "string",
-                description: "Operation ID or route path to retrieve",
-              },
+                description: "Operation ID or route path to retrieve"
+              }
             },
-            required: ["id", "operationIdOrRoute"],
-          },
-        },
+            required: ["id", "operationIdOrRoute"]
+          }
+        }
       ];
 
       return jsonRpcResponse(message.id, { tools });
@@ -643,10 +643,10 @@ async function handleMcp(request: Request) {
             content: [
               {
                 type: "text",
-                text: `Error: Unknown tool: ${name}`,
-              },
+                text: `Error: Unknown tool: ${name}`
+              }
             ],
-            isError: true,
+            isError: true
           });
         }
 
@@ -656,10 +656,10 @@ async function handleMcp(request: Request) {
           content: [
             {
               type: "text",
-              text: `Error executing tool: ${error.message}`,
-            },
+              text: `Error executing tool: ${error.message}`
+            }
           ],
-          isError: true,
+          isError: true
         });
       }
     }
@@ -681,7 +681,7 @@ function jsonRpcResponse(id: any, result: any) {
       {
         jsonrpc: "2.0",
         id,
-        result,
+        result
       },
       null,
       2
@@ -689,8 +689,8 @@ function jsonRpcResponse(id: any, result: any) {
     {
       headers: {
         "Content-Type": "application/json",
-        ...corsHeaders,
-      },
+        ...corsHeaders
+      }
     }
   );
 }
@@ -701,8 +701,8 @@ function jsonRpcError(id: any, code: number, message: string) {
     {
       headers: {
         "Content-Type": "application/json",
-        ...corsHeaders,
-      },
+        ...corsHeaders
+      }
     }
   );
 }
@@ -715,7 +715,7 @@ export default {
     if (request.method === "OPTIONS") {
       return new Response(null, {
         status: 204,
-        headers: corsHeaders,
+        headers: corsHeaders
       });
     }
 
@@ -733,5 +733,5 @@ export default {
     }
 
     return handleMcp(request);
-  },
+  }
 };
