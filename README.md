@@ -28,6 +28,17 @@ Features
 
 For other clients, use MCP URL: https://openapi-mcp.openapisearch.com/mcp
 
+## Example: explore Xquik
+
+Call `getApiOverview` with `id` set to `xquik`. OpenAPI Search resolves that
+identifier to Xquik's current specification at
+`https://xquik.com/openapi.json`. You can also pass that URL directly.
+
+Choose an operation from the overview, then call `getApiOperation` with the
+same `id` and its operation ID or route. Protected Xquik API requests use the
+`x-api-key` header. This MCP server explores the specification; it does not
+execute Xquik API requests.
+
 ## Local testing
 
 First run the server
