@@ -259,7 +259,7 @@ function generateOverview(hostname: string, openapi: OpenapiDocument): string {
     )
   );
 
-  const endpointCount = output.length - 3;
+  const endpointCount = items.length;
   output.unshift("");
   output.unshift(
     `Below is an overview of the ${hostname} openapi in simple language. This API contains ${endpointCount} endpoints. For more detailed information of an endpoint, visit https://oapis.org/summary/${hostname}/[idOrRoute]`
